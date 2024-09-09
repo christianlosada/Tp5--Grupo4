@@ -5,25 +5,28 @@
  */
 package Vistas;
 
-
 import Entidades.Contactos;
 import Entidades.Directorio;
 import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Netbook
  */
 public class VistaPrincipal extends javax.swing.JFrame {
- static Directorio direc=new Directorio();
+
+    static Directorio direc = new Directorio();
+    DefaultTableModel modelo = new DefaultTableModel();
     /**
      * Creates new form VistaPrincipal
      */
     public VistaPrincipal() {
         initComponents();
-        
+        DesactivarCampos();
+
     }
 
     /**
@@ -58,36 +61,103 @@ public class VistaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(600, 600));
 
-        escritorio.setBackground(new java.awt.Color(102, 255, 255));
+        escritorio.setBackground(new java.awt.Color(204, 204, 255));
+        escritorio.setForeground(new java.awt.Color(0, 0, 0));
         escritorio.setPreferredSize(new java.awt.Dimension(500, 354));
 
+        lblFormularioContacto.setForeground(new java.awt.Color(0, 0, 0));
         lblFormularioContacto.setText("FORMULARIO DE CONTACTO");
 
+        lblDni.setBackground(new java.awt.Color(0, 0, 0));
+        lblDni.setForeground(new java.awt.Color(0, 0, 0));
         lblDni.setText("DNI:");
 
+        lblNombre.setBackground(new java.awt.Color(0, 0, 0));
+        lblNombre.setForeground(new java.awt.Color(0, 0, 0));
         lblNombre.setText("NOMBRE:");
 
+        lblApellido.setBackground(new java.awt.Color(0, 0, 0));
+        lblApellido.setForeground(new java.awt.Color(0, 0, 0));
         lblApellido.setText("APELLIDO:");
 
+        lblDireccion.setBackground(new java.awt.Color(0, 0, 0));
+        lblDireccion.setForeground(new java.awt.Color(0, 0, 0));
         lblDireccion.setText("DIRECCION:");
 
+        lblCiudad.setBackground(new java.awt.Color(0, 0, 0));
+        lblCiudad.setForeground(new java.awt.Color(0, 0, 0));
         lblCiudad.setText("CIUDAD:");
 
+        lblTelefono.setBackground(new java.awt.Color(0, 0, 0));
+        lblTelefono.setForeground(new java.awt.Color(0, 0, 0));
         lblTelefono.setText("TELEFONO:");
 
+        txtDni.setBackground(new java.awt.Color(255, 255, 255));
+        txtDni.setForeground(new java.awt.Color(0, 0, 0));
+        txtDni.setCaretColor(new java.awt.Color(0, 0, 0));
+        txtDni.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDniFocusLost(evt);
+            }
+        });
+
+        txtNombre.setBackground(new java.awt.Color(255, 255, 255));
+        txtNombre.setCaretColor(new java.awt.Color(0, 0, 0));
+        txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNombreFocusLost(evt);
+            }
+        });
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
             }
         });
 
+        txtApellido.setBackground(new java.awt.Color(255, 255, 255));
+        txtApellido.setCaretColor(new java.awt.Color(0, 0, 0));
+        txtApellido.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtApellidoFocusLost(evt);
+            }
+        });
+
+        txtCiudad.setBackground(new java.awt.Color(255, 255, 255));
+        txtCiudad.setCaretColor(new java.awt.Color(0, 0, 0));
+        txtCiudad.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCiudadFocusLost(evt);
+            }
+        });
         txtCiudad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCiudadActionPerformed(evt);
             }
         });
 
+        txtDireccion.setBackground(new java.awt.Color(255, 255, 255));
+        txtDireccion.setCaretColor(new java.awt.Color(0, 0, 0));
+        txtDireccion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDireccionFocusLost(evt);
+            }
+        });
+
+        txtTelefono.setBackground(new java.awt.Color(255, 255, 255));
+        txtTelefono.setCaretColor(new java.awt.Color(0, 0, 0));
+        txtTelefono.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTelefonoFocusLost(evt);
+            }
+        });
+        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTelefonoActionPerformed(evt);
+            }
+        });
+
         btnGuardar.setText("Guardar");
+        btnGuardar.setEnabled(false);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -95,6 +165,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         });
 
         btnBorrar.setText("Borrar");
+        btnBorrar.setEnabled(false);
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBorrarActionPerformed(evt);
@@ -102,6 +173,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         });
 
         btnSalir.setText("Salir");
+        btnSalir.setEnabled(false);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -185,7 +257,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
                                 .addComponent(btnBorrar)
                                 .addGap(26, 26, 26)
                                 .addComponent(btnSalir)))
-                        .addContainerGap(135, Short.MAX_VALUE))))
+                        .addContainerGap(94, Short.MAX_VALUE))))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,7 +302,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,45 +322,114 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCiudadActionPerformed
 
     private void btnVerDirectorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerDirectorioActionPerformed
-        // ver directorio completo y filtrar por ciudad o por telefono
-        
+
         //escritorio.removeAll();
         escritorio.repaint();
         vistaBuscar a1 = new vistaBuscar();
         a1.setVisible(true);
         escritorio.add(a1);
         escritorio.moveToFront(a1);
-        
+
     }//GEN-LAST:event_btnVerDirectorioActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-          // vacia los campos de texto.
-          vaciarCampos(escritorio);  
+        ActivarCampos();
+        btnGuardar.setEnabled(true);
+        btnBorrar.setEnabled(true);
+        btnSalir.setEnabled(true);
+        //vaciarCampos(escritorio);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-      // Tsalida del sistema.
-      System.exit(0);  
+        // Tsalida del sistema.
+        System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         // elimina del Map al usuario
-        
+
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // obtiene datos y carga tabla.
-        int dni= Integer.parseInt(txtDni.getText());
+        
+       int dni = Integer.parseInt(txtDni.getText());
         String nombre = txtNombre.getText();
         String apellido = txtApellido.getText();
         String ciudad = txtCiudad.getText();
         String direccion = txtDireccion.getText();
-        Long telefono= Long.parseLong(txtTelefono.getText());
-        Contactos contacto= new Contactos(dni, nombre, apellido,direccion, ciudad);
-       direc.agregarContacto(telefono, contacto);
-        System.out.println(direc.toString());
-       
+        Long telefono = Long.parseLong(txtTelefono.getText());
+        
+         
+        Contactos contacto = new Contactos(dni, nombre, apellido, direccion, ciudad);
+        direc.agregarContacto(telefono, contacto);
+       modelo.addRow(new Object[]{dni, nombre, apellido, ciudad, direccion, telefono});
+        
+        
+        
+        
+        txtDni.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtCiudad.setText("");
+        txtDireccion.setText("");
+        txtTelefono.setText("");
+        DesactivarCampos();
+        
+        
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void txtDniFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDniFocusLost
+        String val = "[0-9]+";
+        if (!txtDni.getText().matches(val)) {
+            JOptionPane.showMessageDialog(this, "coloque un numero", "ERROR", HEIGHT);
+            txtDni.requestFocusInWindow();
+        }
+    }//GEN-LAST:event_txtDniFocusLost
+
+    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTelefonoActionPerformed
+
+    private void txtTelefonoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTelefonoFocusLost
+        try {
+            String Telefono = txtTelefono.getText();
+            Double tel = Double.parseDouble(Telefono);
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(this, "coloque un numero correcto");
+            txtTelefono.requestFocusInWindow();
+        }
+
+
+    }//GEN-LAST:event_txtTelefonoFocusLost
+
+    private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
+        if (txtNombre.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "coloque un nombre", "ERROR", HEIGHT);
+            txtNombre.requestFocusInWindow();
+
+        }
+    }//GEN-LAST:event_txtNombreFocusLost
+
+    private void txtApellidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtApellidoFocusLost
+        if (txtApellido.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "coloque un Apellido", "ERROR", HEIGHT);
+            txtApellido.requestFocusInWindow();
+        }
+    }//GEN-LAST:event_txtApellidoFocusLost
+
+    private void txtDireccionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDireccionFocusLost
+        if (txtDireccion.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "coloque una Direccion", "ERROR", HEIGHT);
+            txtDireccion.requestFocusInWindow();
+        }
+    }//GEN-LAST:event_txtDireccionFocusLost
+
+    private void txtCiudadFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCiudadFocusLost
+        if (txtCiudad.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "coloque la ciudad", "ERROR", HEIGHT);
+            txtCiudad.requestFocusInWindow();
+        }
+    }//GEN-LAST:event_txtCiudadFocusLost
 
     /**
      * @param args the command line arguments
@@ -347,14 +488,48 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 
-public void vaciarCampos(JDesktopPane escritorio){
-    //para textFields
-    for (int i = 0; i<escritorio.getComponents().length; i++) {
-        if (escritorio.getComponents()[i] instanceof JTextField) {
-            JTextField caja=(JTextField)escritorio.getComponents()[i];
-            caja.setText("");
+    public void vaciarCampos(JDesktopPane escritorio) {
+        //para textFields
+        for (int i = 0; i < escritorio.getComponents().length; i++) {
+            if (escritorio.getComponents()[i] instanceof JTextField) {
+                JTextField caja = (JTextField) escritorio.getComponents()[i];
+                caja.setText("");
+            }
+
         }
-        
+    }
+
+    private void ActivarCampos() {
+        txtDni.setEnabled(true);
+        txtNombre.setEnabled(true);
+        txtApellido.setEnabled(true);
+        txtDireccion.setEnabled(true);
+        txtCiudad.setEnabled(true);
+        txtTelefono.setEnabled(true);
+    }
+
+    private void DesactivarCampos() {
+        txtDni.setEnabled(false);
+        txtNombre.setEnabled(false);
+        txtApellido.setEnabled(false);
+        txtDireccion.setEnabled(false);
+        txtCiudad.setEnabled(false);
+        txtTelefono.setEnabled(false);
     }
 }
-}
+
+    /*private void llenarTabla(){
+        int dni = Integer.parseInt(txtDni.getText());
+        String nombre = txtNombre.getText();
+        String apellido = txtApellido.getText();
+        String ciudad = txtCiudad.getText();
+        String direccion = txtDireccion.getText();
+        Long telefono = Long.parseLong(txtTelefono.getText());
+        
+         
+        Contactos contacto = new Contactos(dni, nombre, apellido, direccion, ciudad);
+        direc.agregarContacto(telefono, contacto);
+    }
+    
+    }
+

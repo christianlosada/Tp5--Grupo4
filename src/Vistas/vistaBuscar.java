@@ -5,7 +5,6 @@
  */
 package Vistas;
 
-
 import Entidades.Contactos;
 import java.util.TreeMap;
 import javax.swing.table.DefaultTableModel;
@@ -14,14 +13,15 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Netbook
  */
-
 public class vistaBuscar extends javax.swing.JInternalFrame {
-    private DefaultTableModel modelo= new DefaultTableModel();
+
+    DefaultTableModel modelo = new DefaultTableModel() ;
+    
     /**
      * Creates new form vistaBuscar
      */
     public vistaBuscar() {
-        
+
         initComponents();
         iniciarTabla();
         cargarDatos(VistaPrincipal.direc.getDirectorio());
@@ -118,17 +118,17 @@ public class vistaBuscar extends javax.swing.JInternalFrame {
 
     private void mbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mbSalirActionPerformed
         // minimiza la ventana
-        
+
     }//GEN-LAST:event_mbSalirActionPerformed
 
     private void mbSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mbSalirMouseClicked
         // esconde la ventana
         hide();
-        
+
     }//GEN-LAST:event_mbSalirMouseClicked
 
-    public void iniciarTabla(){
-        
+    public void iniciarTabla() {
+
         modelo.addColumn("Dni");
         modelo.addColumn("Nombre");
         modelo.addColumn("Apellido");
@@ -136,12 +136,25 @@ public class vistaBuscar extends javax.swing.JInternalFrame {
         modelo.addColumn("Ciudad");
         modelo.addColumn("Telefono");
         tablaDirectorio.setModel(modelo);
+        
+
     }
-    public  void cargarDatos(TreeMap p){
+    
+
+    public void cargarDatos(TreeMap p) {
+        Object[] datos = new Object[modelo.getColumnCount()];
+        int i = 1;
         for (Object r : p.values()) {
-            Contactos c=(Contactos) r;
-            modelo.addRow(new Object[]{c.getDni(), c.getNombre(), c.getApellido(), c.getDireccion(), c.getCiudad(), c.getTelefono()});
-    }}
+            Contactos c = (Contactos) r;
+        modelo.addRow(new Object[]{c.getDni(), c.getNombre(), c.getApellido(), c.getDireccion(), c.getCiudad(), c.getTelefono()});
+        }
+    
+        
+    
+            
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenuBar jMenuBar1;
