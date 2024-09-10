@@ -80,24 +80,29 @@ public class vistaBuscar extends javax.swing.JInternalFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGap(254, 254, 254)
                 .addComponent(jbEliminar)
-                .addGap(260, 260, 260))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbEliminar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         mbFiltrar.setText("Filtrar");
 
         miFiltrarPorCiudad.setText("Filtrar por Ciudad");
+        miFiltrarPorCiudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miFiltrarPorCiudadActionPerformed(evt);
+            }
+        });
         mbFiltrar.add(miFiltrarPorCiudad);
 
         miTelefono.setText("Filtrar por Telefono");
@@ -154,6 +159,17 @@ public class vistaBuscar extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "usted no selecciono ninguna lista");
         }
     }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void miFiltrarPorCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miFiltrarPorCiudadActionPerformed
+        
+       JOptionPane.showInputDialog(rootPane, "Ingrese una Ciudad", null, HEIGHT);
+        modelo.setRowCount(0);
+        for (Object ele: VistaPrincipal.direc.getDirectorio().values()) {
+            Contactos c = (Contactos) ele;
+            
+            modelo.addRow(new Object[]{c.getDni(), c.getNombre(), c.getApellido(), c.getDireccion(), c.getCiudad(), c.getTelefono()});
+        }
+    }//GEN-LAST:event_miFiltrarPorCiudadActionPerformed
 
     public void iniciarTabla() {
 

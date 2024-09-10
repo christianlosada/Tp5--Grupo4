@@ -17,19 +17,23 @@ public class Contactos {
     String nombre, apellido, ciudad, direccion;
     Long telefono;
 
-    public Contactos(int dni, String nombre, String apellido, String ciudad, String direcciono) {
+    public Contactos(int dni, String nombre, String apellido, String ciudad, String direccion, Long telefono) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
         this.ciudad = ciudad;
         this.direccion = direccion;
-        
+        this.telefono = telefono;
     }
+
+    
 
     @Override
     public String toString() {
-        return ""+nombre+apellido;
+        return "Contactos{" + "dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", ciudad=" + ciudad + ", direccion=" + direccion + ", telefono=" + telefono + '}';
     }
+
+    
     
 
     public int getDni() {

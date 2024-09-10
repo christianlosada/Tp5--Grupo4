@@ -7,6 +7,7 @@ package Vistas;
 
 import Entidades.Contactos;
 import Entidades.Directorio;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 import javax.swing.JDesktopPane;
@@ -19,10 +20,18 @@ import javax.swing.table.DefaultTableModel;
  * @author Netbook
  */
 public class VistaPrincipal extends javax.swing.JFrame {
-
-    public TreeMap<Long, Contactos> directorio = new TreeMap();
+    static ArrayList<String> datos;
     static Directorio direc = new Directorio();
     DefaultTableModel modelo = new DefaultTableModel();
+
+    public static Directorio getDirec() {
+        return direc;
+    }
+
+    public static void setDirec(Directorio direc) {
+        VistaPrincipal.direc = direc;
+    }
+    
 
     /**
      * Creates new form VistaPrincipal
@@ -63,12 +72,12 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnNuevo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 600));
 
         escritorio.setBackground(new java.awt.Color(204, 204, 255));
         escritorio.setForeground(new java.awt.Color(0, 0, 0));
         escritorio.setPreferredSize(new java.awt.Dimension(500, 354));
 
+        lblFormularioContacto.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblFormularioContacto.setForeground(new java.awt.Color(0, 0, 0));
         lblFormularioContacto.setText("FORMULARIO DE CONTACTO");
 
@@ -222,59 +231,58 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(109, 109, 109)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(escritorioLayout.createSequentialGroup()
-                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNombre)
-                            .addComponent(lblDni)
-                            .addComponent(lblApellido)
-                            .addComponent(lblDireccion)
-                            .addComponent(lblCiudad))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(escritorioLayout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(lblFormularioContacto)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(escritorioLayout.createSequentialGroup()
+                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, escritorioLayout.createSequentialGroup()
+                                .addComponent(lblTelefono)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, escritorioLayout.createSequentialGroup()
+                                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNombre)
+                                    .addComponent(lblDni)
+                                    .addComponent(lblApellido)
+                                    .addComponent(lblDireccion)
+                                    .addComponent(lblCiudad))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtDni, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                                    .addComponent(txtDni)
                                     .addComponent(txtNombre)
                                     .addComponent(txtApellido)
                                     .addComponent(txtDireccion)
-                                    .addComponent(txtCiudad))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnVerDirectorio)
-                                .addGap(264, 264, 264))
-                            .addGroup(escritorioLayout.createSequentialGroup()
-                                .addGap(69, 69, 69)
-                                .addComponent(lblFormularioContacto)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(escritorioLayout.createSequentialGroup()
-                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(escritorioLayout.createSequentialGroup()
-                                .addComponent(lblTelefono)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(escritorioLayout.createSequentialGroup()
-                                .addComponent(btnNuevo)
-                                .addGap(41, 41, 41)
-                                .addComponent(btnGuardar)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBorrar)
-                                .addGap(26, 26, 26)
-                                .addComponent(btnSalir)))
-                        .addContainerGap(132, Short.MAX_VALUE))))
+                                    .addComponent(txtCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                        .addComponent(btnVerDirectorio)
+                        .addGap(44, 44, 44))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(btnNuevo)
+                .addGap(18, 18, 18)
+                .addComponent(btnGuardar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnBorrar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSalir)
+                .addGap(9, 9, 9))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(34, 34, 34)
                 .addComponent(lblFormularioContacto)
-                .addGap(18, 18, 18)
+                .addGap(61, 61, 61)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDni)
                     .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVerDirectorio))
-                .addGap(18, 18, 18)
-                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(11, 11, 11)
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombre)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -293,24 +301,24 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTelefono)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalir)
-                    .addComponent(btnNuevo)
+                    .addComponent(btnBorrar)
                     .addComponent(btnGuardar)
-                    .addComponent(btnBorrar))
-                .addGap(0, 41, Short.MAX_VALUE))
+                    .addComponent(btnNuevo))
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
         );
 
         pack();
@@ -350,23 +358,23 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        try{
-        int dni = Integer.parseInt(txtDni.getText());
-            if (txtNombre.getText().isEmpty()|| txtApellido.getText().isEmpty()|| txtDireccion.getText().isEmpty()|| txtCiudad.getText().isEmpty()) {
+        try {
+            int dni = Integer.parseInt(txtDni.getText());
+            if (txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty() || txtDireccion.getText().isEmpty() || txtCiudad.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "no debe haber campos vacios");
                 return;
             }
-        String nombre = txtNombre.getText();
-        String apellido = txtApellido.getText();
-        String direccion = txtDireccion.getText();
-        String ciudad = txtCiudad.getText();
-        Long telefono = Long.parseLong(txtTelefono.getText());
-         
-       Contactos contacto = new Contactos(dni, nombre, apellido, ciudad, direccion);
-        VistaPrincipal.direc.agregarContacto(telefono, contacto);
-        
-        }catch(NumberFormatException nf){
-            JOptionPane.showMessageDialog(this, "coloque un numero correcto");
+            String nombre = txtNombre.getText();
+            String apellido = txtApellido.getText();
+            String direccion = txtDireccion.getText();
+            String ciudad = txtCiudad.getText();
+            Long telefono = Long.parseLong(txtTelefono.getText());
+
+            Contactos contacto = new Contactos(dni, nombre, apellido, ciudad, direccion,telefono);
+            direc.agregarContacto(telefono, contacto);
+
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(this, "Coloque un numero correcto");
         }
         txtDni.setText("");
         txtNombre.setText("");
@@ -380,7 +388,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtDniFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDniFocusLost
-       String val = "[0-9]+";
+        String val = "[0-9]+";
         if (!txtDni.getText().matches(val)) {
             JOptionPane.showMessageDialog(this, "coloque un numero", "ERROR", HEIGHT);
             txtDni.requestFocusInWindow();
@@ -398,7 +406,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(this, "coloque un numero correcto");
             txtTelefono.requestFocusInWindow();
-        */
+         */
 
 
     }//GEN-LAST:event_txtTelefonoFocusLost
@@ -522,18 +530,5 @@ public class VistaPrincipal extends javax.swing.JFrame {
         txtTelefono.setEnabled(false);
     }
 
-    private void llenarTabla() {
-        int dni = Integer.parseInt(txtDni.getText());
-        String nombre = txtNombre.getText();
-        String apellido = txtApellido.getText();
-        String ciudad = txtCiudad.getText();
-        String direccion = txtDireccion.getText();
-        Long telefono = Long.parseLong(txtTelefono.getText());
-
-        Contactos contacto = new Contactos(dni, nombre, apellido, direccion, ciudad);
-        direc.agregarContacto(telefono, contacto);
-    }
-
-   
 
 }
