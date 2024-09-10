@@ -17,13 +17,13 @@ public class Contactos {
     String nombre, apellido, ciudad, direccion;
     Long telefono;
 
-    public Contactos(int dni, String nombre, String apellido, String ciudad, String direccion) {
+    public Contactos(int dni, String nombre, String apellido, String ciudad, String direcciono) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
         this.ciudad = ciudad;
         this.direccion = direccion;
-       
+        
     }
 
     @Override

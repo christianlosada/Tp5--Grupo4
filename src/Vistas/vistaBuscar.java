@@ -6,7 +6,10 @@
 package Vistas;
 
 import Entidades.Contactos;
+import Entidades.Directorio;
+import java.util.ArrayList;
 import java.util.TreeMap;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,8 +18,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class vistaBuscar extends javax.swing.JInternalFrame {
 
-    DefaultTableModel modelo = new DefaultTableModel() ;
-    
+    DefaultTableModel modelo = new DefaultTableModel();
+
     /**
      * Creates new form vistaBuscar
      */
@@ -39,6 +42,7 @@ public class vistaBuscar extends javax.swing.JInternalFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaDirectorio = new javax.swing.JTable();
+        jbEliminar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         mbFiltrar = new javax.swing.JMenu();
         miFiltrarPorCiudad = new javax.swing.JMenuItem();
@@ -62,19 +66,33 @@ public class vistaBuscar extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tablaDirectorio);
 
+        jbEliminar.setText("ELIMINAR");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
+
         jDesktopPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jbEliminar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbEliminar)
+                .addGap(260, 260, 260))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 8, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jbEliminar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         mbFiltrar.setText("Filtrar");
@@ -127,6 +145,16 @@ public class vistaBuscar extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_mbSalirMouseClicked
 
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        int filas = tablaDirectorio.getSelectedRow();
+        if (filas != -1) {
+            modelo.removeRow(filas);
+            
+        }else{
+            JOptionPane.showMessageDialog(this, "usted no selecciono ninguna lista");
+        }
+    }//GEN-LAST:event_jbEliminarActionPerformed
+
     public void iniciarTabla() {
 
         modelo.addColumn("Dni");
@@ -136,29 +164,26 @@ public class vistaBuscar extends javax.swing.JInternalFrame {
         modelo.addColumn("Ciudad");
         modelo.addColumn("Telefono");
         tablaDirectorio.setModel(modelo);
-        
 
     }
-    
 
     public void cargarDatos(TreeMap p) {
-        Object[] datos = new Object[modelo.getColumnCount()];
-        int i = 1;
+        modelo.setRowCount(0);
         for (Object r : p.values()) {
             Contactos c = (Contactos) r;
-        modelo.addRow(new Object[]{c.getDni(), c.getNombre(), c.getApellido(), c.getDireccion(), c.getCiudad(), c.getTelefono()});
+            modelo.addRow(new Object[]{c.getDni(), c.getNombre(), c.getApellido(), c.getDireccion(), c.getCiudad(), c.getTelefono()});
         }
+
+    }
     
         
     
-            
-    }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbEliminar;
     private javax.swing.JMenu mbFiltrar;
     private javax.swing.JMenu mbSalir;
     private javax.swing.JMenuItem miFiltrarPorCiudad;

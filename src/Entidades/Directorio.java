@@ -40,7 +40,7 @@ public class Directorio {
 // A. agregarContacto() que permite registrar un nuevo contacto con su respectivo nro. de
 //teléfono. Siendo el nro. del teléfono la clave del mismo.
     public void agregarContacto(Long telefono, Contactos contacto) {
-        
+        directorio.putIfAbsent(telefono, contacto); //si esta lo agrega si no , no lo agrega
     }
 //B. buscarContacto() que en base al nro. de teléfono retorna el Contacto asociado al mismo.
 
