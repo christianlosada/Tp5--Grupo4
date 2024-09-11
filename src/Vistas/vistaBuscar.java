@@ -106,6 +106,11 @@ public class vistaBuscar extends javax.swing.JInternalFrame {
         mbFiltrar.add(miFiltrarPorCiudad);
 
         miTelefono.setText("Filtrar por Telefono");
+        miTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miTelefonoActionPerformed(evt);
+            }
+        });
         mbFiltrar.add(miTelefono);
 
         jMenuBar1.add(mbFiltrar);
@@ -154,20 +159,37 @@ public class vistaBuscar extends javax.swing.JInternalFrame {
         int filas = tablaDirectorio.getSelectedRow();
         if (filas != -1) {
             modelo.removeRow(filas);
-            
-        }else{
+
+        } else {
             JOptionPane.showMessageDialog(this, "usted no selecciono ninguna lista");
         }
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void miFiltrarPorCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miFiltrarPorCiudadActionPerformed
-
-        modelo.setRowCount(0);
-        for (Object ele: VistaPrincipal.getDirec().buscarVariosContactos( JOptionPane.showInputDialog(rootPane, "Ingrese una Ciudad", null, HEIGHT))) {
-            Contactos c = (Contactos) ele;
-            modelo.addRow(new Object[]{c.getDni(), c.getNombre(), c.getApellido(), c.getDireccion(), c.getCiudad(), c.getTelefono()});
+        ArrayList lista = VistaPrincipal.getDirec().buscarVariosContactos(JOptionPane.showInputDialog(rootPane, "Ingrese una Ciudad", null, HEIGHT));
+        if (lista.size() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "No existe");
+        } else {
+            modelo.setRowCount(0);
+            for (Object ele : lista) {
+                Contactos c = (Contactos) ele;
+                modelo.addRow(new Object[]{c.getDni(), c.getNombre(), c.getApellido(), c.getDireccion(), c.getCiudad(), c.getTelefono()});
+            }
         }
     }//GEN-LAST:event_miFiltrarPorCiudadActionPerformed
+
+    private void miTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTelefonoActionPerformed
+        modelo.setRowCount(0);
+        try {
+            Long tel = Long.parseLong(JOptionPane.showInputDialog(rootPane, "Ingrese un Numero", null, HEIGHT));
+            Contactos c = (Contactos) VistaPrincipal.direc.buscarUnContacto(tel);
+            modelo.addRow(new Object[]{c.getDni(), c.getNombre(), c.getApellido(), c.getDireccion(), c.getCiudad(), c.getTelefono()});
+        } catch (java.lang.NumberFormatException r) {
+            JOptionPane.showMessageDialog(rootPane, "Error " + r + " Ingrese un valor valido", "Error", HEIGHT);
+        }
+
+
+    }//GEN-LAST:event_miTelefonoActionPerformed
 
     public void iniciarTabla() {
 
@@ -189,9 +211,7 @@ public class vistaBuscar extends javax.swing.JInternalFrame {
         }
 
     }
-    
-        
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;

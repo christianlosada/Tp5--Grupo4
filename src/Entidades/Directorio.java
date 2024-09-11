@@ -35,7 +35,6 @@ public class Directorio {
     public String toString() {
         return "Directorio{" + "directorio=" + directorio + '}';
     }
-    
 
 // A. agregarContacto() que permite registrar un nuevo contacto con su respectivo nro. de
 //teléfono. Siendo el nro. del teléfono la clave del mismo.
@@ -44,18 +43,20 @@ public class Directorio {
     }
 //B. buscarContacto() que en base al nro. de teléfono retorna el Contacto asociado al mismo.
 
-    public String buscarUnContacto(Long telefono) {
+    public Contactos buscarUnContacto(Long telefono) {
+
         for (Long t : directorio.keySet()) {
             if (t == telefono) {
-                return directorio.ceilingEntry(telefono).toString();
+                return directorio.get(t);
             }
-
         }
-        return "contacto no encontrado";
-    }
 
+        return null;
+
+    }
 //C. buscarTeléfono() que en base a un apellido nos devuelve un Set<Long> con los números
 //de teléfono asociados a dicho apellido.
+
     public Set<Long> buscarTelefono(String apellidoBuscado) {
         Set<Long> lista = null;
         for (Contactos p : directorio.values()) {
