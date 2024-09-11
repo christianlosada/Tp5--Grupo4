@@ -74,13 +74,11 @@ public class Directorio {
 //D. buscarContactos() que en base a una ciudad nos devuelve un ArrayList con los
 //Contactos asociados a dicha ciudad.
     public ArrayList buscarVariosContactos(String ciudadBuscada) {
-        ArrayList<String> ciudadesEncontradas = new ArrayList();
+        ArrayList<Contactos> ciudadesEncontradas = new ArrayList();
         for (Contactos p : directorio.values()) {
             if (p.getCiudad().equalsIgnoreCase(ciudadBuscada)) {
-                ciudadesEncontradas.add(ciudadBuscada);
-
+                ciudadesEncontradas.add(p);
             }
-
         }
         return ciudadesEncontradas;
 

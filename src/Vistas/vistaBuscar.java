@@ -161,12 +161,10 @@ public class vistaBuscar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void miFiltrarPorCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miFiltrarPorCiudadActionPerformed
-        
-       JOptionPane.showInputDialog(rootPane, "Ingrese una Ciudad", null, HEIGHT);
+
         modelo.setRowCount(0);
-        for (Object ele: VistaPrincipal.direc.getDirectorio().values()) {
+        for (Object ele: VistaPrincipal.getDirec().buscarVariosContactos( JOptionPane.showInputDialog(rootPane, "Ingrese una Ciudad", null, HEIGHT))) {
             Contactos c = (Contactos) ele;
-            
             modelo.addRow(new Object[]{c.getDni(), c.getNombre(), c.getApellido(), c.getDireccion(), c.getCiudad(), c.getTelefono()});
         }
     }//GEN-LAST:event_miFiltrarPorCiudadActionPerformed
