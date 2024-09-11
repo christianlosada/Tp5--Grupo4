@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Netbook
  */
 public class VistaPrincipal extends javax.swing.JFrame {
-    static ArrayList<String> datos;
+    static ArrayList<String> datos ;
     static Directorio direc = new Directorio();
     DefaultTableModel modelo = new DefaultTableModel();
 
@@ -39,7 +39,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     public VistaPrincipal() {
         initComponents();
         DesactivarCampos();
-
+        VistaPrincipal.setDirec(new Directorio());  
     }
 
     /**
@@ -400,48 +400,30 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTelefonoActionPerformed
 
     private void txtTelefonoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTelefonoFocusLost
-        /*try {
-            String Telefono = txtTelefono.getText();
-            Double tel = Double.parseDouble(Telefono);
-        } catch (NumberFormatException nf) {
-            JOptionPane.showMessageDialog(this, "coloque un numero correcto");
-            txtTelefono.requestFocusInWindow();
-         */
+        
 
 
     }//GEN-LAST:event_txtTelefonoFocusLost
 
     private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
-        /*if (txtNombre.getText().length() == 0) {
-            JOptionPane.showMessageDialog(this, "coloque un nombre", "ERROR", HEIGHT);
-            txtNombre.requestFocusInWindow();
-
-        }*/
+        
     }//GEN-LAST:event_txtNombreFocusLost
 
     private void txtApellidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtApellidoFocusLost
-        /*if (txtApellido.getText().length() == 0) {
-            JOptionPane.showMessageDialog(this, "coloque un Apellido", "ERROR", HEIGHT);
-            txtApellido.requestFocusInWindow();
-        }*/
+       
     }//GEN-LAST:event_txtApellidoFocusLost
 
     private void txtDireccionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDireccionFocusLost
-        /*if (txtDireccion.getText().length() == 0) {
-            JOptionPane.showMessageDialog(this, "coloque una Direccion", "ERROR", HEIGHT);
-            txtDireccion.requestFocusInWindow();
-        }*/
+        
     }//GEN-LAST:event_txtDireccionFocusLost
 
     private void txtCiudadFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCiudadFocusLost
-        /*if (txtCiudad.getText().length() == 0) {
-            JOptionPane.showMessageDialog(this, "coloque la ciudad", "ERROR", HEIGHT);
-            txtCiudad.requestFocusInWindow();
-        }*/
+        
     }//GEN-LAST:event_txtCiudadFocusLost
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         // elimina del Map al usuario
+       
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     /**

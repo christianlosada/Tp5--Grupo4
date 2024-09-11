@@ -7,6 +7,7 @@ package Vistas;
 
 import Entidades.Contactos;
 import Entidades.Directorio;
+import static Vistas.VistaPrincipal.datos;
 import java.util.ArrayList;
 import java.util.TreeMap;
 import javax.swing.JOptionPane;
@@ -156,12 +157,20 @@ public class vistaBuscar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mbSalirMouseClicked
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-        int filas = tablaDirectorio.getSelectedRow();
-        if (filas != -1) {
-            modelo.removeRow(filas);
+        int filaSeleccionada = tablaDirectorio.getSelectedRow();  // OBTENGO LA FILA
+
+        if (filaSeleccionada != -1) {  // VERIFICO QUE UNA FILA ESTE SELCCIONADA
+            // OBTENGO EL TELEFONO DE LA FILA
+            Long telefono = (Long) tablaDirectorio.getValueAt(filaSeleccionada, 5);
+
+            // ELIMINO DEL TREEMAP
+            VistaPrincipal.getDirec().borrarContacto(telefono);
+
+            // ELIMINO LA FILA
+            modelo.removeRow(filaSeleccionada);
 
         } else {
-            JOptionPane.showMessageDialog(this, "usted no selecciono ninguna lista");
+            JOptionPane.showMessageDialog(this, "No se seleccionó ninguna fila.");
         }
     }//GEN-LAST:event_jbEliminarActionPerformed
 
@@ -180,16 +189,27 @@ public class vistaBuscar extends javax.swing.JInternalFrame {
 
     private void miTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTelefonoActionPerformed
         modelo.setRowCount(0);
-        try {
-            Long tel = Long.parseLong(JOptionPane.showInputDialog(rootPane, "Ingrese un Numero", null, HEIGHT));
-            Contactos c = (Contactos) VistaPrincipal.direc.buscarUnContacto(tel);
-            modelo.addRow(new Object[]{c.getDni(), c.getNombre(), c.getApellido(), c.getDireccion(), c.getCiudad(), c.getTelefono()});
-        } catch (java.lang.NumberFormatException r) {
-            JOptionPane.showMessageDialog(rootPane, "Error " + r + " Ingrese un valor valido", "Error", HEIGHT);
+        try{
+            String t = JOptionPane.showInputDialog(rootPane, "Ingrese un Número");
+            if (t != null && !t.trim().isEmpty()) {
+               
+                Long tel = Long.parseLong(t);
+
+                
+                Contactos c = VistaPrincipal.getDirec().buscarUnContacto(tel);
+
+                modelo.addRow(new Object[]{c.getDni(), c.getNombre(), c.getApellido(), c.getDireccion(), c.getCiudad(), c.getTelefono()});
+            }else
+                JOptionPane.showMessageDialog(rootPane, "Contacto no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+            }catch (NullPointerException np) {
+
+            JOptionPane.showMessageDialog(this, "ingrese un numero correcto");
         }
 
 
     }//GEN-LAST:event_miTelefonoActionPerformed
+
+    
 
     public void iniciarTabla() {
 

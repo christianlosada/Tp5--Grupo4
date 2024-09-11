@@ -46,11 +46,10 @@ public class Directorio {
     public Contactos buscarUnContacto(Long telefono) {
 
         for (Long t : directorio.keySet()) {
-            if (t == telefono) {
+            if (t.equals(telefono)) {
                 return directorio.get(t);
             }
         }
-
         return null;
 
     }
