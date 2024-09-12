@@ -355,7 +355,12 @@ public class VistaPrincipal extends javax.swing.JFrame {
             String direccion = txtDireccion.getText();
             String ciudad = txtCiudad.getText();
             Long telefono = Long.parseLong(txtTelefono.getText());
-
+            
+            for (Long ele : direc.getDirectorio().keySet()) {
+                if(telefono.equals(ele)){
+                    JOptionPane.showMessageDialog(this, "Este numero ya existe", "No se puede agregar", HEIGHT);
+                }
+            }
             Contactos contacto = new Contactos(dni, nombre, apellido, ciudad, direccion,telefono);
             direc.agregarContacto(telefono, contacto);
 

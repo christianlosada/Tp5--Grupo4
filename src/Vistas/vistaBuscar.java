@@ -9,6 +9,7 @@ import Entidades.Contactos;
 import Entidades.Directorio;
 import static Vistas.VistaPrincipal.datos;
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.TreeMap;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -19,7 +20,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class vistaBuscar extends javax.swing.JInternalFrame {
 
-    DefaultTableModel modelo = new DefaultTableModel();
+    DefaultTableModel modelo = new DefaultTableModel() {
+
+        public boolean isCellEditable(int fila, int columna) {
+            return false;
+        }
+    };
 
     /**
      * Creates new form vistaBuscar
@@ -48,6 +54,8 @@ public class vistaBuscar extends javax.swing.JInternalFrame {
         mbFiltrar = new javax.swing.JMenu();
         miFiltrarPorCiudad = new javax.swing.JMenuItem();
         miTelefono = new javax.swing.JMenuItem();
+        miApellido = new javax.swing.JMenuItem();
+        miDirectorio = new javax.swing.JMenuItem();
         mbSalir = new javax.swing.JMenu();
 
         setTitle("Directorio");
@@ -97,6 +105,11 @@ public class vistaBuscar extends javax.swing.JInternalFrame {
         );
 
         mbFiltrar.setText("Filtrar");
+        mbFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mbFiltrarActionPerformed(evt);
+            }
+        });
 
         miFiltrarPorCiudad.setText("Filtrar por Ciudad");
         miFiltrarPorCiudad.addActionListener(new java.awt.event.ActionListener() {
@@ -113,6 +126,22 @@ public class vistaBuscar extends javax.swing.JInternalFrame {
             }
         });
         mbFiltrar.add(miTelefono);
+
+        miApellido.setText("Filtrar por Apellido");
+        miApellido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miApellidoActionPerformed(evt);
+            }
+        });
+        mbFiltrar.add(miApellido);
+
+        miDirectorio.setText("Directorio Completo");
+        miDirectorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miDirectorioActionPerformed(evt);
+            }
+        });
+        mbFiltrar.add(miDirectorio);
 
         jMenuBar1.add(mbFiltrar);
 
@@ -211,6 +240,34 @@ public class vistaBuscar extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_miTelefonoActionPerformed
 
+    private void miApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miApellidoActionPerformed
+        modelo.setRowCount(0);
+        String dato = JOptionPane.showInputDialog(rootPane, "Ingrese un Apellido");
+        Set<Long> lista = VistaPrincipal.direc.buscarTelefono(dato);
+
+        if (lista != null) {
+            for (Long ele : VistaPrincipal.direc.getDirectorio().keySet()) {
+                for (Long num : lista) {
+                    if (ele.equals(num)) {
+                        Contactos c = VistaPrincipal.direc.getDirectorio().get(num);
+                        modelo.addRow(new Object[]{c.getDni(), c.getNombre(), c.getApellido(), c.getDireccion(), c.getCiudad(), c.getTelefono()});
+                    }
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Apellido no encontrado");
+        }
+    }//GEN-LAST:event_miApellidoActionPerformed
+
+    private void miDirectorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miDirectorioActionPerformed
+
+        cargarDatos(VistaPrincipal.direc.getDirectorio());
+    }//GEN-LAST:event_miDirectorioActionPerformed
+
+    private void mbFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mbFiltrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mbFiltrarActionPerformed
+
     public void iniciarTabla() {
 
         modelo.addColumn("Dni");
@@ -240,6 +297,8 @@ public class vistaBuscar extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbEliminar;
     private javax.swing.JMenu mbFiltrar;
     private javax.swing.JMenu mbSalir;
+    private javax.swing.JMenuItem miApellido;
+    private javax.swing.JMenuItem miDirectorio;
     private javax.swing.JMenuItem miFiltrarPorCiudad;
     private javax.swing.JMenuItem miTelefono;
     private javax.swing.JTable tablaDirectorio;

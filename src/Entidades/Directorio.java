@@ -6,6 +6,7 @@
 package Entidades;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -57,13 +58,11 @@ public class Directorio {
 //de teléfono asociados a dicho apellido.
 
     public Set<Long> buscarTelefono(String apellidoBuscado) {
-        Set<Long> lista = null;
+        Set<Long> lista = new HashSet<>();
         for (Contactos p : directorio.values()) {
 
             if (p.getApellido().equalsIgnoreCase(apellidoBuscado)) {
-
                 lista.add(p.getTelefono());
-
             }
 
         }
