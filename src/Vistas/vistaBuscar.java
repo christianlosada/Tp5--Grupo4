@@ -175,41 +175,41 @@ public class vistaBuscar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void miFiltrarPorCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miFiltrarPorCiudadActionPerformed
-        ArrayList lista = VistaPrincipal.getDirec().buscarVariosContactos(JOptionPane.showInputDialog(rootPane, "Ingrese una Ciudad", null, HEIGHT));
-        if (lista.size() == 0) {
-            JOptionPane.showMessageDialog(rootPane, "No existe");
-        } else {
-            modelo.setRowCount(0);
-            for (Object ele : lista) {
-                Contactos c = (Contactos) ele;
-                modelo.addRow(new Object[]{c.getDni(), c.getNombre(), c.getApellido(), c.getDireccion(), c.getCiudad(), c.getTelefono()});
+        String dato = JOptionPane.showInputDialog(rootPane, "Ingrese una Ciudad", null, HEIGHT);
+        ArrayList lista = VistaPrincipal.getDirec().buscarVariosContactos(dato);
+        if (dato != null && !dato.trim().isEmpty()) {
+            if (lista.size() == 0) {
+                JOptionPane.showMessageDialog(rootPane, "No existe");
+            } else {
+                modelo.setRowCount(0);
+                for (Object ele : lista) {
+                    Contactos c = (Contactos) ele;
+                    modelo.addRow(new Object[]{c.getDni(), c.getNombre(), c.getApellido(), c.getDireccion(), c.getCiudad(), c.getTelefono()});
+                }
             }
         }
     }//GEN-LAST:event_miFiltrarPorCiudadActionPerformed
 
     private void miTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTelefonoActionPerformed
         modelo.setRowCount(0);
-        try{
+        try {
             String t = JOptionPane.showInputDialog(rootPane, "Ingrese un Número");
             if (t != null && !t.trim().isEmpty()) {
-               
+
                 Long tel = Long.parseLong(t);
 
-                
                 Contactos c = VistaPrincipal.getDirec().buscarUnContacto(tel);
 
                 modelo.addRow(new Object[]{c.getDni(), c.getNombre(), c.getApellido(), c.getDireccion(), c.getCiudad(), c.getTelefono()});
-            }else
-                JOptionPane.showMessageDialog(rootPane, "Contacto no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
-            }catch (NullPointerException np) {
+            }
+
+        } catch (NullPointerException np) {
 
             JOptionPane.showMessageDialog(this, "ingrese un numero correcto");
         }
 
 
     }//GEN-LAST:event_miTelefonoActionPerformed
-
-    
 
     public void iniciarTabla() {
 

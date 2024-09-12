@@ -66,7 +66,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         txtDireccion = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
-        btnBorrar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         btnVerDirectorio = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
@@ -177,14 +176,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnBorrar.setText("Borrar");
-        btnBorrar.setEnabled(false);
-        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBorrarActionPerformed(evt);
-            }
-        });
-
         btnSalir.setText("Salir");
         btnSalir.setEnabled(false);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -221,7 +212,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.setLayer(txtDireccion, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(txtTelefono, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(btnGuardar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        escritorio.setLayer(btnBorrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(btnSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(btnVerDirectorio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(btnNuevo, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -257,19 +247,17 @@ public class VistaPrincipal extends javax.swing.JFrame {
                                     .addComponent(txtApellido)
                                     .addComponent(txtDireccion)
                                     .addComponent(txtCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
                         .addComponent(btnVerDirectorio)
                         .addGap(44, 44, 44))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(170, 170, 170)
                 .addComponent(btnNuevo)
-                .addGap(18, 18, 18)
+                .addGap(77, 77, 77)
                 .addComponent(btnGuardar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnBorrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(73, 73, 73)
                 .addComponent(btnSalir)
-                .addGap(9, 9, 9))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,10 +289,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTelefono)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalir)
-                    .addComponent(btnBorrar)
                     .addComponent(btnGuardar)
                     .addComponent(btnNuevo))
                 .addGap(20, 20, 20))
@@ -347,7 +334,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         ActivarCampos();
         btnGuardar.setEnabled(true);
-        btnBorrar.setEnabled(true);
         btnSalir.setEnabled(true);
         //vaciarCampos(escritorio);
     }//GEN-LAST:event_btnNuevoActionPerformed
@@ -421,11 +407,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtCiudadFocusLost
 
-    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        // elimina del Map al usuario
-       
-    }//GEN-LAST:event_btnBorrarActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -462,7 +443,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnSalir;
